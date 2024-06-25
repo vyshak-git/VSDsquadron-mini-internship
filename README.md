@@ -53,6 +53,36 @@ Now lets look at the output and see the number of instructions again. <br/>
 
 We can see that the number of instructions have reduced and there are only 12 instructions.
 
+## Project: Digital Clock Cycle Divider
+A clock divider or a frequency divider is a digital circuit that takes an input frequency and puts out a reduced output frequency. <br/>
+Let us write a simple C program to divide a clock frequency by a certain factor. <br/>
+```C
+#include <stdio.h>
+#include <stdint.h>
+
+#define DIVIDE_BY 2 //division factor
+
+// Clock divider function
+void clock_divider(uint32_t input_frequency, uint32_t divide_by) {
+    uint32_t output_frequency = input_frequency / divide_by;
+
+    printf("Input Frequency: %u Hz\n", input_frequency);
+    printf("Divide by: %u\n", divide_by);
+    printf("Output Frequency: %u Hz\n", output_frequency);
+}
+
+int main() {
+//Input frequency = 100MHz
+    uint32_t input_frequency = 100000000; 
+    clock_divider(input_frequency, DIVIDE_BY);
+
+    return 0;
+}
+```
+
+The above code is very simple and divides the input frequency by the factor specified. <br/>
+Here we use `uint32_t` which is a fixed-width integer type as we are writing the code for embedded application. <br/>
+By changing the value of `DIVIDE_BY`, we can change the factor by which the frequency divides. <br/>
 
 
 
