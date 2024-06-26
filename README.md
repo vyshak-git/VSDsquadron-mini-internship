@@ -53,6 +53,20 @@ Now lets look at the output and see the number of instructions again. <br/>
 
 We can see that the number of instructions have reduced and there are only 12 instructions.
 
+To check if the output from the gcc matches with the output from the riscv gcc, we can use spike. To invoke it we do the following,
+```bash
+spike pk sum2n.o
+```
+
+The output: <br/>
+![Screenshot from 2024-06-26 23-48-10](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/0a917510-8b10-42a2-b88e-f60aeff87bad) <br/>
+
+The output is same hence the RISC-V instruction set is performing as expected. <br/>
+We can enter the debug mode by giving a `-d` switch. This lets us explore the instructions step by step. <br/>
+![Screenshot from 2024-06-26 23-50-36](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/97fd5849-cd77-42b2-9ebf-63cf5f6abe6f) 
+
+Here `until pc 0 100b0` sets the pointer upto that address(100b0). So whatever registers data we access will be only upto that step. So when we give `reg 0 a2`, It outputs the data in the a2 register at that instance. When we press "Enter", the next instruction is executed and the data in register a2 changes. <br/>
+
 ## Project: Digital Clock Cycle Divider
 A clock divider or a frequency divider is a digital circuit that takes an input frequency and puts out a reduced output frequency. <br/>
 Let us write a simple C program to divide a clock frequency by a certain factor. <br/>
@@ -83,6 +97,26 @@ int main() {
 The above code is very simple and divides the input frequency by the factor specified. <br/>
 Here we use `uint32_t` which is a fixed-width integer type as we are writing the code for embedded application. <br/>
 By changing the value of `DIVIDE_BY`, we can change the factor by which the frequency divides. <br/>
+
+Let us compile it and look at the output: <br/>
+![Screenshot from 2024-06-27 00-21-56](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/22273da1-dfee-41c9-918c-c957ec77940e) <br/>
+
+So the frequency is being divided by 2 just like we intended. <br/>
+We also compile it using the riscv gcc and verify the output using spike. <br/>
+![Screenshot from 2024-06-27 00-35-34](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/a2f9ceac-d4f5-4849-8a97-98829e5a6d09)
+
+We get the same output. <br/>
+
+Let us take a look at the instruction set. We have compiled using both `O1` and `Ofast`. But in this program we observe that both of them have the same number of instructions for the main bloack unlike our previous program where there was a slight reduction in the `Ofast` compilation. The screenshots are shown below, <br/>
+
+![Screenshot from 2024-06-27 00-39-37](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/365ac429-9ab6-4e0e-b3af-02e24102c6fc) <br/>
+*compiled with O1*
+
+![Screenshot from 2024-06-27 00-39-52](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/75e3ed9e-d7f4-4339-8331-8ce3f3dda9b4) <br/>
+*compiled with Ofast*
+
+
+
 
 
 
