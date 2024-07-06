@@ -115,6 +115,41 @@ Let us take a look at the instruction set. We have compiled using both `O1` and 
 ![Screenshot from 2024-06-27 00-39-52](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/75e3ed9e-d7f4-4339-8331-8ce3f3dda9b4) <br/>
 *compiled with Ofast*
 
+## RISC-V Instruction types.
+A CPU contains 32 general purpose registers indexed from 0-31. They are names X0-X31. The value of the first register (X0) is always 0. The rest 31 are readable/writable. In a 32-bit architecture, The width of each general purpose register is 32 bit. Similarly in a 64-bit architecture, the width is 64 bit. <br/>
+The RISC-V instruction set has 6 formats. They are R,I,S,B,U,J. 
+```bash
+R -> reg 2 reg operations
+I -> immediate & load operations
+S -> store operation
+B -> conditional branch operation
+U -> long immediate
+J -> unconditional jump.
+```
+The immage below shows the machine instruction format.
+![word-image-1](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/58ffb7a7-1373-4087-8d01-3fcde0c70fef) <br/>
+*Source: https://fraserinnovations.com/risc-v/risc-v-instruction-set-explanation/* <br/>
+```bash
+In the above image,
+opcode -> Used to identify the type of instruction
+rd -> destination register.
+rs1 & rs2 -> source register.
+funct3 & funct7 -> used to indentify the type of operation to be performed.
+immediate -> integer value.
+```
+
+Let us look at the different instructions, <br/>
+#### R-type 
+These are operations wihtput an immediate.Immediate is a number that exists as an integer in the instructions. the values of rs1 & rs2 are operated upon and stored in rd. <br/>
+Some of the R type instructions are ADD, SLT, SLTU, AND, OR, XOR, SLL, SRL, SRA, SUB.
+
+#### I-type
+These are instructions where the operation of the value in rs1 is performed with the immediate and the result is stored in rd. opcode is `OP-IMM == 7'b001_0011`. <br/>
+Some of the instructions are ADDI, SLTI, SLTIU, ANDI, ORI, XORI.
+
+#### U-type
+LUI instruction sets immediate value to the high 20bits ofrd and 0 to the low 12bits. <br/>
+AUIPC sets immadiate value to high 20bits of rd and adds the low 12 bits to the current PC. PC is program counter.
 
 
 
