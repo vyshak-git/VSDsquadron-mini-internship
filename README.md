@@ -151,7 +151,36 @@ Some of the instructions are ADDI, SLTI, SLTIU, ANDI, ORI, XORI.
 LUI instruction sets immediate value to the high 20bits ofrd and 0 to the low 12bits. <br/>
 AUIPC sets immadiate value to high 20bits of rd and adds the low 12 bits to the current PC. PC is program counter.
 
+#### S-type
+In this type of instruction the operations are performed on the values of rs1 and rs2 and the result is stored in one of those registers as there is no rd. <br/>
+SW is a S-type instruction.
 
+#### B-type
+These are conditional instructions. The instruction decides wheater to jump to a instruction depending on the condition. This instruction also doesn't have an rd. <br/>
+Some of the instructions are BEQ, BNE, BLT, BLTU, BGE, BGEU
+
+#### J-type
+Just like the U-type, Even this instruction just has an immediate and a rd.
+
+### TASK: To identify the type of instruction and write the instruction in 32 bit format.
+#### 1. ADD r1, r2, r3
+```bash
+R-type
+32 bit => 0000000_00011_00010_000_00001_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 2. SUB r3, r1, r2
+```bash
+R-type
+32 bit => 0100000_00010_00001_000_00011_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 3. AND r2, r1, r3
+```bash
+R-type
+32 bit => 0000000_00011_00001_111_00010_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
 
 
 
