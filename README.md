@@ -181,9 +181,64 @@ R-type
 32 bit => 0000000_00011_00001_111_00010_0110011
           funct7  rs2   rs1  funct3 rd   opcode
 ```
-
-
-
-
-
+#### 4. OR r8, r2, r5
+```bash
+R-type
+32 bit => 0000000_00101_00010_110_01000_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 5. XOR r8, r1, r4
+```bash
+R-type
+32 bit => 0000000_00100_00001_100_01000_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 6. SLT r10, r2, r4
+```bash
+R-type
+32 bit => 0000000_00100_00010_010_01010_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 7. ADDI r12, r3, 5
+```bash
+I-type
+32 bit => 000000000101_00011_000_01100_0010011
+           immediate   rs1  funct3 rd  opcode
+```
+#### 8. SW r3 r1, 4
+```bash
+S-type
+32 bit => 0000000_00011_00001_010_00100_0100011
+       imm(11:5)  rs2   rs1 funct3 imm(4:0) opcode
+```
+#### 9. SRL r16, r11, r2
+```bash
+R-type
+32 bit => 0000000_00010_01011_101_10000_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
+#### 10. BNE r0, r1, 20
+```bash
+B-type
+32 bit => 0000001_00001_00000_001_01000_1100011
+   imm(12)(10:5)  rs2   rs1 funct3 imm(4:1)(11)   opcode
+```
+#### 11. BEQ r0, r0, 15
+```bash
+B-type
+32 bit => 0000000_00000_00000_000_11110_1100011
+   imm(12)(10:5)  rs2   rs1 funct3 imm(4:1)(11)   opcode
+```
+#### 12. LW r13, r11, 2
+```bash
+I-type
+32 bit => 000000000010_01011_010_01101_0000011
+           immediate   rs1  funct3 rd  opcode
+```
+#### 13. SLL r15, r11, r2
+```bash
+R-type
+32 bit => 0000000_00010_01011_001_01111_0110011
+          funct7  rs2   rs1  funct3 rd   opcode
+```
 
