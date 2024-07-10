@@ -241,4 +241,83 @@ R-type
 32 bit => 0000000_00010_01011_001_01111_0110011
           funct7  rs2   rs1  funct3 rd   opcode
 ```
+### Task: To use a RISC-V core to simulate instructions and observe their waveforms
 
+Since we are not building a riscv core in this workshop, We use a prebuilt micro-architecture and a test bench. Let us start by installing the tools, iverilog and gtkwave.
+```bash
+sudo apt update
+sudo apt install iverilog gtkwave
+```
+
+Once the tools are installed we clone a repo containing the verilog codes for the riscv core.
+```bash
+git clone https://github.com/vinayrayapati/rv32i.git
+```
+
+I have alos created a separate directory and moved the verilogs files to the new directory.
+```bash
+mkdir vys_rv32
+cd vys_rv32
+cp ../rv32i/iiitb_rv32i.v .
+cp ../rv32i/iiitb_rv32i_tb.v .
+```
+
+We look at the verilog code and observe the block the hard codes the instructions. Let us uncomment the codes that we require.
+
+![Screenshot from 2024-07-10 17-06-06](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/579b3f17-6d7d-40b9-a31d-d6128cb15b15)
+
+Now we can run the code.
+```bash
+iverilog -o iiitb_rv32i iiitb_rv32i.v iiitb_rv32i_tb.v
+./iiitb_rv32i
+```
+
+after this a `.vdc` file is generated. We can open this using the gtkwave and observe the waveform. <br/>
+![Screenshot from 2024-07-10 17-32-41](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/1541e598-d9f0-43bf-b5c8-237175e752b8)
+
+```bash
+gtkwave iiitb_rv32i.vcd
+```
+
+The above command opens up a window. In the left hand side of the window we can click the desired address that we wish to see the waveforms for. We click the necessary ones and click `insert` at the bottom. Now we can start observing the waveforms. <br/>
+![Screenshot from 2024-07-10 16-26-25](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/44a5a8e0-a31c-420d-9df3-143a86e2bd89)
+
+#### Observations:
+#### 1. ADD:
+![Screenshot from 2024-07-10 16-26-53](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/669bc9ac-3c69-4039-87a3-0554c9f1c59e) <br/>
+The values  at A and B are added and stored at ALUOUT. So 1+2=3.
+
+#### 2. SUB:
+![Screenshot from 2024-07-10 16-59-00](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/78a93ba7-ce34-4373-a788-461fbf032cbe)
+
+#### 3. AND:
+![Screenshot from 2024-07-10 16-59-35](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/1251d08c-2690-4c5c-945e-e259288991cc) <br/>
+Bitwise AND operation. 1=>0001 AND 3=>0011 = 0001=>1
+
+#### 4. OR:
+![Screenshot from 2024-07-10 17-01-58](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/1c127504-1142-4fbd-9e97-d886a3383d93) <br/>
+Bitwise OR. 2=>0010 OR 5=>0101 = 0111=>7
+
+#### 5. XOR:
+![Screenshot from 2024-07-10 17-02-11](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/7b114ebc-ccb8-4793-b48c-d9d2b10511da) <br/>
+bitwise XOR. 1=>0001 XOR 4=>0100 = 0101=>5
+
+#### 6. SLT:
+![Screenshot from 2024-07-10 17-02-25](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/498b71a9-459c-4528-b8f0-60706f89a923) <br/>
+Since 2<4, output is 1
+
+#### 7. ADDI:
+![Screenshot from 2024-07-10 17-10-02](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/b27a96fa-f029-45a0-963e-e70a1a17b9c4) <br/>
+Here immediate is added to A. So 4+5 = 9.
+
+#### 8. SW:
+![Screenshot from 2024-07-10 17-10-44](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/c3454627-c31e-464e-a642-977b2e1302a3)
+
+#### 9. BNE:
+![Screenshot from 2024-07-10 17-11-48](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/f10f31b5-3e20-43ba-8b54-ddf11d0450f5)
+
+#### 10. BEQ:
+![Screenshot from 2024-07-10 17-12-16](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/b66f076c-d61b-4ea5-98af-2e06f9c1fb46)
+
+#### 11. LW:
+![Screenshot from 2024-07-10 17-12-43](https://github.com/vyshak-git/VSDsquadron-mini-internship/assets/84836428/0e3b969f-8b7f-4f4a-bd6c-8392b139f5e8)
